@@ -12,25 +12,26 @@ I18n.enforce_available_locales = false
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = "Usage: bundle exec ruby bin/track_package [tracking_number] [carrier]"
+  opts.banner = 'Usage: bundle exec bin/track_package [interest_rate]' \
+                ' [salary] [principal] [years] [Percentage] [Inflation]'
 
-  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+  opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
     options[:verbose] = v
   end
 end.parse!
 
 if ARGV.size <= 0
-  $stderr.puts "Usage: #{$0} Please specify your tracking id and carrier"
-  $stderr.puts "       Parameters:"
-  $stderr.puts "         Interest Rate \t(requried)"
-  $stderr.puts "         Salary \t(requried)"
-  $stderr.puts "         Principal \t(requried)"
-  $stderr.puts "         Years \t\t(requried)"
-  $stderr.puts "         Percentage \t(optional)"
-  $stderr.puts "         Inflation \t(optional)"
+  $stderr.puts "Usage: #{$PROGRAM_NAME} Please specify the following parameters"
+  $stderr.puts '       Parameters:'
+  $stderr.puts "         Interest Rate \t\t(requried)"
+  $stderr.puts "         Salary \t\t(requried)"
+  $stderr.puts "         Principal \t\t(requried)"
+  $stderr.puts "         Years to grow \t\t(requried)"
+  $stderr.puts "         Percent of salary  \t(optional)"
+  $stderr.puts "         Inflation \t\t(optional)"
   $stderr.puts
-  $stderr.puts "       Example usage: bundle exec ruby bin/compound_intrest 10 50000 5 20 3"
-  $stderr.puts ""
+  $stderr.puts '       Example usage: bundle exec bin/compound_intrest 10 10000 0 20 3'
+  $stderr.puts ''
 end
 
 params = {
