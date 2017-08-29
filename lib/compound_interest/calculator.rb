@@ -25,16 +25,16 @@ class CompoundIntrest
 
       years.times do |year|
         total += contributions + (total * interest_rate)
-        rows << [year + 1, contributions.round(2), total.round(2)]
+        rows << [year + 1, salary.round, contributions.round, total.round]
 
         @salary = (@salary * inflation) + @salary
       end
-      # table = Terminal::Table.new :headings => ['Year', 'Salary', 'Totals Saved'], :rows => rows
-      # puts table
+       table = Terminal::Table.new :headings => ['Year', 'Salary', 'Contributions', 'Totals Saved'], :rows => rows
+       puts table
     end
 
     def contributions
-      (salary * percentage) + salary
+      (salary * percentage)
     end
   end
 end
