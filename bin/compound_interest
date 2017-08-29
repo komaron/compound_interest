@@ -1,0 +1,45 @@
+#!/usr/bin/env ruby
+
+lib = File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+Bundler.require(:default)
+
+require 'compound_intrest'
+require 'optparse'
+require 'money'
+
+I18n.enforce_available_locales = false
+
+options = {}
+OptionParser.new do |opts|
+  opts.banner = "Usage: bundle exec ruby bin/track_package [tracking_number] [carrier]"
+
+  opts.on("-v", "--[no-]verbose", "Run verbosely") do |v|
+    options[:verbose] = v
+  end
+end.parse!
+
+if ARGV.size <= 0
+  $stderr.puts "Usage: #{$0} Please specify your tracking id and carrier"
+  $stderr.puts "       Parameters:"
+  $stderr.puts "         Interest Rate \t(requried)"
+  $stderr.puts "         Salary \t(requried)"
+  $stderr.puts "         Principal \t(requried)"
+  $stderr.puts "         Years \t\t(requried)"
+  $stderr.puts "         Percentage \t(optional)"
+  $stderr.puts "         Inflation \t(optional)"
+  $stderr.puts
+  $stderr.puts "       Example usage: bundle exec ruby bin/compound_intrest 10 50000 5 20 3"
+  $stderr.puts ""
+end
+
+params = {
+  interest_rate:   ARGV[0].to_i,
+  salary:          ARGV[1].to_i,
+  principal:       ARGV[2].to_i,
+  years:           ARGV[3].to_i,
+  percentage:      (ARGV[4] || 10).to_i,
+  inflation:       (ARGV[5] || 3).to_i
+}
+
+#CompoundIntrest::Caluculator.perform(params)
