@@ -4,7 +4,7 @@ lib = File.expand_path('../../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 Bundler.require(:default)
 
-require 'compound_intrest'
+require 'compound_interest'
 require 'optparse'
 require 'money'
 
@@ -42,4 +42,4 @@ params = {
   inflation:       (ARGV[5] || 3).to_i
 }
 
-#CompoundIntrest::Caluculator.perform(params)
+CompoundIntrest::Caluculator.perform(params)
