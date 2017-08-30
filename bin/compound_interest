@@ -12,11 +12,11 @@ I18n.enforce_available_locales = false
 
 options = {}
 OptionParser.new do |opts|
-  opts.banner = 'Usage: bundle exec bin/track_package [interest_rate]' \
-                ' [salary] [principal] [years] [Percentage] [Inflation]'
+  opts.banner = 'Usage: bundle exec bin/track_package [interest_rate]'
+  ' [salary] [principal] [years] [Percentage] [Inflation]'
 
-  opts.on('-v', '--[no-]verbose', 'Run verbosely') do |v|
-    options[:verbose] = v
+  opts.on('-s', '--summarize') do |v|
+    options[:summarize] = v
   end
 end.parse!
 
@@ -41,6 +41,6 @@ params = {
   years:           ARGV[3].to_i,
   percentage:      (ARGV[4] || 10).to_i,
   inflation:       (ARGV[5] || 3).to_i
-}
+}.merge(options)
 
-CompoundIntrest::Caluculator.perform(params)
+CompoundIntrest::Calculator.perform(params)

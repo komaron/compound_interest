@@ -1,5 +1,5 @@
 class CompoundIntrest
-  class Caluculator
+  class Calculator
     attr_accessor :principal, :interest_rate, :years, :salary, :percentage
     attr_reader :inflation
 
@@ -15,7 +15,7 @@ class CompoundIntrest
     end
 
     def self.perform(params)
-      c = CompoundIntrest::Caluculator.new(params)
+      c = CompoundIntrest::Calculator.new(params)
       c.perform_calculations
     end
 
@@ -29,8 +29,15 @@ class CompoundIntrest
 
         @salary = (@salary * inflation) + @salary
       end
-       table = Terminal::Table.new :headings => ['Year', 'Salary', 'Contributions', 'Totals Saved'], :rows => rows
-       puts table
+
+      total_saved = Money.new(total.round * 100).format
+      table = Terminal::Table.new(
+        headings: ['Year', 'Salary', 'Contributions', 'Totals Saved'],
+        rows: rows
+      )
+
+      puts table
+      puts "\nAfter #{years} years, you will save #{total_saved}."
     end
 
     def contributions
